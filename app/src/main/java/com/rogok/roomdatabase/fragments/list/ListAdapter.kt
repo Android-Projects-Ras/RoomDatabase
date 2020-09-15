@@ -3,9 +3,10 @@ package com.rogok.roomdatabase.fragments.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.rogok.roomdatabase.R
-import com.rogok.roomdatabase.data.User
+import com.rogok.roomdatabase.model.User
 import kotlinx.android.synthetic.main.custom_row.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
@@ -26,6 +27,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.tv_first_name.text = currentItem.firstName.toString()
         holder.itemView.tv_last_name.text = currentItem.lastName.toString()
         holder.itemView.tv_age.text = currentItem.age.toString()
+        holder.itemView.row_layout.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount() = userList.size
