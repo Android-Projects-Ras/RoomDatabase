@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.custom_row.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var userList = emptyList<User>()
+    var userList = emptyList<User>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,8 +24,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
         holder.itemView.tv_id.text = currentItem.id.toString()
-        holder.itemView.tv_first_name.text = currentItem.firstName.toString()
-        holder.itemView.tv_last_name.text = currentItem.lastName.toString()
+        holder.itemView.tv_first_name.text = currentItem.firstName
+        holder.itemView.tv_last_name.text = currentItem.lastName
         holder.itemView.tv_age.text = currentItem.age.toString()
         holder.itemView.row_layout.setOnClickListener {
             val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
@@ -34,6 +34,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount() = userList.size
+
 
     fun setData (user: List<User>) {
         this.userList = user
